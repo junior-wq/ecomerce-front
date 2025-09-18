@@ -22,9 +22,5 @@ Make sure the backend is running and accessible before starting the frontend.
 ## Getting Started
 1. Clone this repository:
 2. npm install
-3. npm start
+3. npm run dev
 
-
-
-})
-```
