@@ -1,0 +1,25 @@
+
+.product-list-containner{
+  background-color:white;
+  padding-top:20px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.our-collection{
+  align-self: center;
+  margin: 0;
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+
+.products-grid{
+  padding: 10px 100px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap:20px ;
+  flex-wrap:wrap;
+}

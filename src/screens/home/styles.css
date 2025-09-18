@@ -1,0 +1,60 @@
+.banner-container {
+  /* background-color: aqua; */
+  height: calc(100vh - 50px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.banner-container_left {
+  /* background-color: whitesmoke; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.banner-container_left h2 {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.756);
+}
+
+.banner-container_left h1 {
+  display: block;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+  margin-bottom: 12px;
+}
+
+.banner-container_right {
+  overflow: hidden;
+  background-color: wheat;
+  display: flex;  /* Utilize flexbox para controlar o alinhamento e tamanho */
+  justify-content: center;  /* Alinhe a imagem ao centro */
+  align-items: center;  /* Alinhe a imagem verticalmente */
+}
+
+.image {
+  object-position:top;
+  object-fit: cover;  /* Garantir que a imagem cubra toda a área sem deformar */
+  width: 100%;  /* A imagem ocupará 100% da largura disponível */
+  height: 100%;  /* A imagem ocupará 100% da altura disponível */
+}
+
+.our-collection{
+  margin-top: 30px;
+  margin-left: 125px;
+  font-size:30px ;
+  margin-bottom: 15px;
+}
+
+.products-grid{
+  padding: 20px 100px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap:20px ;
+  flex-wrap:wrap;
+
+}
