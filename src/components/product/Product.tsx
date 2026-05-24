@@ -1,12 +1,14 @@
 import React from 'react';
 import './styles.css';
 import { Product as ProductType } from '../../utils';
+import { FaWhatsapp } from 'react-icons/fa';
 
 type Props = {
   product: ProductType;
 };
 
 function Product({ product }: Props) {
+  console.log(`O PRODUCTO ENVIADO E ${product}`)
   const {
     name,
     description,
@@ -14,6 +16,7 @@ function Product({ product }: Props) {
     price,
     discounted_price,
   } = product;
+
 
   return (
     <div className='product-container'>
@@ -34,9 +37,28 @@ function Product({ product }: Props) {
       
       <p className='description'>{description}</p>
       
-      <button className='add-to-cart-button'>
+      {/* <button className='add-to-cart-button'>
         Add to cart
-      </button>
+      </button> */}
+
+
+      <div className="product-actions">
+        {/* <button className="add-to-cart-button">
+          Add to cart
+        </button> */}
+
+        <button className="add-to-cart-button add-to-cart-button__sap">
+         <FaWhatsapp size={16}  />
+          <span>Quero agora</span>
+        </button>
+
+        {/* <button className="whatsapp-button" onClick={()=>{}}>
+          <FaWhatsapp size={16} />
+          WhatsApp
+        </button> */}
+      </div>
+
+
     </div>
   );
 }

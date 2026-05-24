@@ -1,5 +1,4 @@
-// Spinner.tsx
-import './styles.css'; // ✅ Certo, se for CSS global
+import './styles.css'; 
 
 const Spiner = () => {
   return (

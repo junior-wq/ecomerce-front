@@ -1,85 +1,148 @@
-import { useState } from 'react';
+import './styles.css';
+import {  useState } from 'react';
 import ColorSelector from '../../components/color-selector/ColorSelector';
 import Comment from '../../components/comments/Comment';
 import { comments } from '../../components/comments/Comment';
 import ProductDetail from '../../components/product-detail/ProductDetail';
-import './styles.css';
-import { Product as ProductType } from '../../utils';
-import { useParams } from 'react-router-dom';
-import useProducts from '../../hooks/useProducts';
-import axios, { AxiosError } from 'axios';
-import { createItem } from '../../components/cart/services/cartServices';
-import Spiner from '../../components/spiner/spiner';
 
+import { CartProductType, ProductType } from '../../interfaces/interfaces';
+import { useParams } from 'react-router-dom';
+import useProducts, { useProduct } from '../../hooks/useProducts';
+import Spiner from '../../components/spiner/spiner';
+import { createItem } from '../../components/cart/services/cartServices';
+import { addOrUpdateCartItems, useMyCartContext } from '../../state-management/cart-store/context/my-conext';
+
+import { FaWhatsapp } from 'react-icons/fa';
+import apiClient from '../../services/api-client';
+import ProductSpecs from './component/ProductSpecs';
 
 function ProductDetails() {
+
+
+
+
+
+
+
+
+
   const { id: productId } = useParams();
-  const { data, isLoading, error } = useProducts(productId);
+  // const { data, isLoading, error } = useProducts(productId);
   const [quantity, setQuantity] = useState(1);
 
+
+  const { data, isLoading, error } = useProduct( productId);
+    
   const incrementQuantity = () => setQuantity(quantity + 1);
   const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
-
-  const addToCart = async () => {
-    try {
-      await createItem({productId:Number(productId) ,quantity})
-      // console.log('Adicionado ao carrinho:', cartItemRes.data);
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        const typed = err as AxiosError<{ quantity?: string[] }>;
-        const msg = typed.response?.data?.quantity?.[0];
-        if (msg) {
-          console.log(msg);
-        } else {
-          console.log('Erro ao adicionar ao carrinho');
-        }
-      }
-    }
-  };
+  
+  const {state:{cart},dispatch}=useMyCartContext()
 
   const product = data as ProductType;
   const  isQtyGtStock=quantity > product?.stock
-  if (isLoading) return <div><Spiner></Spiner></div>
+  console.log(product)
+
+
+
+  const openWhatsApp = async (product:ProductType)  => {
+  const phone = "258870786266"; // teu número
+  // const message = `Olá, venho do website e estou interessado em ${product}`;
+  const message = `Olá! Acabei de ver ${product.name} no vosso site . Ainda está disponível?`;
+
+  try{
+    const res=await apiClient.post('report/whatsapp/',{product: product.name})
+    console.log('res da api em sucesso',res)
+    window.open(
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );}
+  
+  catch(e){
+    console.log('Hove algum erro inessperado',e)
+  }
+}
+  
+
+
+  
+
+  const addToCart = async () => {
+    if (!product) return;
+
+    const fistImageProduct={...product,image:product.images[0],} as CartProductType
+    const added=addOrUpdateCartItems(cart.cart_item,{product:fistImageProduct,quantity:1, item_price:5,id:product.id as number})
+    console.log(added)
+
+    await createItem({productId:Number(productId) ,quantity})
+    
+    dispatch({
+      type:'ADD',
+      cart_item:{product:fistImageProduct,quantity:1, item_price:product.discounted_price,id:product.id as number } 
+      
+    })
+
+
+  };
+  
+
+
+  if (isLoading) return <div className='p-detail_containner'><Spiner></Spiner></div>
+  if (error) return <p>{error}</p>;
+  if (!product) return <p>Produto não encontrado</p>;
+  
   return (
     <div className="p-detail_containner">
-      <ProductDetail images={product?.images} />
+      
+      <ProductDetail images={product.images as string[]} />
 
       <div className="p-detail_right">
+        {/* <div className='watsap-floating-button'>Contantar</div> */}
+
+
+          <div className="whatsapp-container">
+            <div className="whatsapp-bubble">Fale conosco</div>
+            
+            <button className="whatsapp-button" onClick={()=>openWhatsApp(product)} >
+              <FaWhatsapp size={28} />
+            </button>
+          </div>
+
         <h2>{product?.name}</h2>
         <p>{product?.description}</p>
+        
 
         <div className="price">
           <span className="discount-price">{product?.discounted_price}</span>
-          <span className="original-price">{product.price}</span>
+          {product.price !==  product?.discounted_price && <span className="original-price">{product.price}</span>}
         </div>
 
-        <h3 className="product-detail-subtitle">Choose Color</h3>
+        {/* <h3 className="product-detail-subtitle">Choose Color</h3>
         <div style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
           <ColorSelector color="dodgerblue" />
           <ColorSelector color="black" />
           <ColorSelector color="grey" />
-        </div>
+        </div>    ; */}
 
         <div className="quantity-container">
-          <h3 className="product-detail-subtitle">Choose Quantity</h3>
+          {/* <h3 className="product-detail-subtitle">Choose Quantity</h3>
           <div className="container-horizontal">
             <div className="quantity-control">
               <button onClick={decrementQuantity} className="quantity-btn">-</button>
               <span className="quantity-display">{quantity}</span>
               <button onClick={incrementQuantity} className="quantity-btn">+</button>
             </div>
-            { isQtyGtStock && <small style={{color:'red'}}>A quantidade execede o stock disponivel</small>}
+            { isQtyGtStock && <small style={{color:'red'}}>Quantity out of Stock</small>}
             <div className="actions">
               <button disabled={isQtyGtStock} onClick={addToCart} className="add-to-cart-btn">
                 Add to Cart
               </button>
             </div>
-          </div>
+          </div> */}
+          <ProductSpecs></ProductSpecs>
+          {/* <hr style={{ marginTop: 40, color: 'white-smoke' }} /> */}
+          {/* <h3 style={{ marginTop: 40 }}>Reviews</h3> */}
 
-          <hr style={{ marginTop: 40, color: 'gray' }} />
-          <h3 style={{ marginTop: 20 }}>Comments</h3>
-
-          {comments.map((e, idx) => (
+          {/* {comments.map((e, idx) => (
             <Comment
               key={idx}
               avatar={e.avatar}
@@ -87,7 +150,7 @@ function ProductDetails() {
               text={e.text}
               name={e.name}
             />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
@@ -95,3 +158,9 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
+
+
+
+
+
+

@@ -1,64 +1,80 @@
-import { useEffect, useState } from 'react';
-import CartItem from '../cartItem/CartItem';
+
+import CartItem from './cartItem/CartItem';
 import Button from '../button/Button';
 import Spiner from '../spiner/spiner';
 import EmptyCart from '../../assets/empty-cart.png';
 
-import { useApiDetails } from '../../hooks/useApi';
-import { CartItem as CartItemType, CartType } from '../../interfaces/interfaces';
 import { getCartId } from '../../services/local-storage-servivces';
-import { removeItem } from './services/cartServices';
-
-import './styles.css';
 import apiClient from '../../services/api-client';
+import './styles.css';
+import { useNavigate } from 'react-router-dom';
 
-// Função utilitária fora do componente
-function calculateTotalPrice(cartItems: CartItemType[]) {
-  return cartItems.reduce((total, item) => total + item.quantity * item.item_price, 0);
+import { useAuth } from '../../state-management/cart-store/context/auth-context';
+import { useMyCartContext } from '../../state-management/cart-store/context/my-conext';
+
+interface Props{
+  closeCart:()=>void
 }
 
-function Cart() {
-  const cartId = getCartId();
-  const { data: cart, isLoading } = useApiDetails<CartType>({
-    Apiroute: '/carts',
-    dataId: cartId as string,
-  });
 
-  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
+const Cart = ({closeCart}:Props) => {
+  const navigate = useNavigate()
+  const {state: { cart, isLoading:loading, error }, dispatch } = useMyCartContext()
+  console.log('cart renderiazado ',cart)
+  console.log('os itens no cart ',cart?.cart_item)
 
-  useEffect(() => {
-    setCartItems(cart?.cart_item ?? []);
-  }, [cart]);
-
-  const isCartEmpty = cartItems.length === 0;
-
-  const removeCartItem = (item: CartItemType) => {
-    setCartItems((prev) => removeItem(item.id, prev));
-  };
-
-  const totalPrice = calculateTotalPrice(cartItems);
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const isCartEmpty = cart.cart_item.length === 0;
+  const {user}=useAuth()
+  
+  const handelDeleteItem=async (item:{id:number})=>{
+    dispatch({ type: 'REMOVE',id: item.id })
+    
 
 
-  const handleCheckout= async (cartId:string)=>{
-    try {
-      const res=await apiClient.post<{url:string}>(`/checkout/${cartId}/`)
-      console.log(res.data.url)
-      window.location.href =res.data.url;
-    } catch (error) {
-      console.error(error)
-    }
+    // try {
+    //   await apiClient.delete(`/carts/${getCartId()}/items/${item.id}/`)
+    // } catch (error) {
+    //   const  rolledBackCart=cart as CartType
+    //   dispatch({type:'SET_CART',cart:rolledBackCart})
+    // }
+   
   }
 
+
+
+  const handleCheckout = async (cartId: string) => {
+
+    try { 
+      if (!user) {
+        closeCart()
+        // return navigate('/login')
+      }
+      else{
+        // const res = await apiClient.post<{ url: string }>(`/orders/`,{cart_id:cartId});
+        const res = await apiClient.post<{ url: string }>(`/checkout/${cartId}/`);
+        window.location.href = res.data.url;
+       
+    }
+
+    } catch (err) {
+      console.error('Erro no checkout:', err);
+    }
+  };
+
+  const handleClearCart = () => {
+    cart.cart_item.forEach(item => {
+      dispatch({ type: 'REMOVE', id: item.id });
+    });
+  };
+
+  if (loading) return <Spiner />;
+  if (error) return <p className="cart-error">Erro: {error}</p>;
+  // if (!user) return navigate('/login')
   return (
     <div className="cart-container">
-      <h4 className="cart-title">
-        Shopping Cart ({isCartEmpty ? 0 : totalItems})
-      </h4>
+      <h4 className="cart-title">Shopping Cart ({cart?.total_items ?? 0})</h4>
 
-      {isLoading && <Spiner />}
-
-      {!isLoading && isCartEmpty && (
+      {isCartEmpty ? (
         <div className="empty-cart">
           <img src={EmptyCart} alt="Empty cart" className="empty-cart-img" />
           <p className="empty-cart-desc">Your cart is currently empty.</p>
@@ -66,25 +82,27 @@ function Cart() {
             <Button label="Browse products" />
           </div>
         </div>
-      )}
-
-      {!isLoading && !isCartEmpty && (
+      ) : (
         <>
-          {cartItems.map((item) => (
-            <CartItem
-              onClick={() => removeCartItem(item)}
-              key={item.id}
-              image={item?.product.image}
-              title={item?.product.name}
-              price={item?.item_price}
-              quantity={item?.quantity}
-            />
-          ))}
+          <div className="cart-items">
+            {cart.cart_item.map(item => (
+              <CartItem
+                key={item.id}
+                image={item.product.image }
+                title={item.product.name}
+                price={item.item_price}
+                quantity={item.quantity}
+                onClick={() => handelDeleteItem(item)}
+              />
+            ))}
+          </div>
 
           <div className="cart-footer">
             <div className="cart__horizontal">
               <span className="cart-subtotal">Subtotal</span>
-              <span className="cart-subtotal">${totalPrice.toFixed(2)}</span>
+              <span className="cart-subtotal">
+                ${cart?.total_price?.toFixed(2) ?? 0}
+              </span>
             </div>
 
             <p className="cart--shipping">
@@ -92,14 +110,21 @@ function Cart() {
             </p>
 
             <div className="cart__horizontal">
-              <Button label="Clear cart" variant="secondary" />
-              <Button label="Checkout" onClick={()=>handleCheckout(getCartId() as string)} />
+              <Button label="Clear cart" variant="secondary" onClick={handleClearCart} />
+              <Button
+                label="Checkout"
+                onClick={() => handleCheckout(getCartId() as string)}
+              />
             </div>
           </div>
         </>
       )}
     </div>
   );
-}
+};
 
 export default Cart;
+
+
+
+

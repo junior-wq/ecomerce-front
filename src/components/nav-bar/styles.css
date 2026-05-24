@@ -1,25 +1,36 @@
-
 .nav-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 50px;
   padding: 10px 150px ;
-  gap: 100px;
-  background-color: white;
+  /* gap: 100px; */
+  background-color: var(--surface-color);
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index:999999;
+}
+
+.menu{
+  display: none;
 }
 
 .nav-bar input {
   display: flex;
   flex: 1;
   border: 0;
-  background-color: inherit;
+  background-color: var(--color-bg);
   outline: none;
+  padding: 5px;
+  border-radius: 5px;
 }
 .nav__left{
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
 }
 
 .nav-bar__Logo {
@@ -40,6 +51,44 @@
   font-size: small;
   }
 
+  .nav-bar__links--mobile{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:12px;
+    font-weight: bold;
+    font-size: xx-large;
+    z-index: 999999;
+    /* background-color:antiquewhite */
+    background-color: black;
+  
+  }
+
+  .nav-bar__links--mobile span{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    cursor: pointer;
+    color: pink;
+  }
+  
+  .nav__link--mobile{
+    color: white;
+    font-size: large;
+  }
+
+  .nav__link--mobile:hover{
+    color: pink;
+  }
+
+
 .nav__right{
   padding: 3px;
   display: flex;
@@ -55,8 +104,9 @@
   display: flex;
   flex-grow: 1;
   align-items: center;
-  background-color: whitesmoke;
+  /* background-color:white; */
   border-radius: 5px;
+  background-color: var(--color-bg);
 
 }
 
@@ -70,12 +120,57 @@
 }
 
 .nav__right span{
-  background-color: #ff0000ce;
-  padding: 3px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-danger);
+  padding: 2px;
+  border-radius: 20px;
   position: absolute;
-  top: -13px;
+  top: -10px;
+  left: 10px;
   font-size: 10px;
-  color: white;
+  color:var(--color-light);
+  width: 10px;
+  height: 10px;
   
+}
+
+@media screen and (max-width:800px) {
+  
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  padding: 10px 10px ;
+}
+
+.nav__right{
+  display: none;
+}
+.nav-bar__links{
+  display: none;
+  }
+
+  .menu{
+    cursor: pointer;
+    display: block;
+  }
+
+}
+
+
+
+@media screen and (max-width:1000px) {
+  
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  padding: 10px 10px ;
+}
+
+
 }

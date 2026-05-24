@@ -10,19 +10,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@react-google-maps/api": "^2.20.8",
     "@tailwindcss/postcss": "^4.0.3",
     "autoprefixer": "^10.4.20",
     "axios": "^1.11.0",
+    "canvas-confetti": "^1.9.3",
     "framer-motion": "^12.4.7",
     "postcss": "^8.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.5.0",
+    "react-hook-form": "^7.64.0",
+    "react-icons": "^5.6.0",
     "react-router-dom": "^6.10.0",
-    "tailwindcss": "^4.0.3"
+    "react-toastify": "^11.0.5",
+    "tailwindcss": "^4.0.3",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

@@ -1,32 +1,30 @@
 import { useEffect } from 'react';
-import './styles.css';
+// import './styles.css';
 import model from '../../assets/model.jpg';
 import { Link } from 'react-router-dom';
 // import { Produto } from '../../utils';
 import About from '../../components/about/About';
 import ProductList from '../../components/product-list/ProductList';
-import Contact from '../../components/contact/Contact'
+import Contact from '../../components/form/Form'
+import Slider from '../../components/slider/Slider';
+import Baner from '../../components/baner/Baner';
+import ContactSection from '../../components/map/Map';
+import PopupNewsletter from '../../components/popup/PopupNewsletter';
 
 
 function Home() {
 
   return (
-    <>
-      <div className='banner-container'>
-        <div className='banner-container_left'>
-          <h2>Sale! Up to 50% off</h2>
-          <h1>Summer Sale <br />Collections</h1>
-          <Link className='button button--primary' to={'/shop'}>Shop now</Link>
-        </div>
-
-        <div className='banner-container_right'>
-          <img src={model} className='image' alt="Model" />
-        </div>
-      </div>
+    <><PopupNewsletter></PopupNewsletter>
+      <Slider ></Slider>
       <ProductList/>
-      <About/>
+      <ContactSection />
     </>
   );
 }
 
 export default Home;
+
+
+
+

@@ -8,6 +8,8 @@ interface ProductDetailProps {
 const ProductDetail = ({ images }: ProductDetailProps) => {
   const [mainImage, setMainImage] = useState(images[0]);
 
+  console.log('suas imgs sao',images)
+
   return (
     <div className='p-detail_left'>
       <div className='showcase'>

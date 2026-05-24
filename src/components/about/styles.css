@@ -1,77 +1,126 @@
+/* About.css */
 .about {
-  padding: 10px 11%;
-  display: flex;
-  justify-content: center;
-  /* align-items: center; */
-  height: calc(100vh - 20px);
+  max-width: 1200px;
+  margin: 0 auto;
+  /* padding: 5rem 2rem; */
+  padding: 2rem 2rem;
 }
 
-.about-container {
-  /* background-color: aqua; */
-  display: flex;
+/* Título */
+.about__title {
+  text-align: center;
+  /* margin-bottom: 4rem; */
+  margin-bottom: 3rem;
+}
+
+.about__title h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #111 0%, #444 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Grid */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
-  height: 100%;
-  gap: 50px;
-  overflow: hidden;
 }
 
-.about-image{
-  width: 50%;
-  /* border-radius: 10px; */
-  height: 100%;
-  /* background-color: rebeccapurple; */
-  overflow: hidden;
-  object-fit:cover;
-}
-
-.about-image img {
+/* Imagem */
+.about__image img {
   width: 100%;
-  /* border-radius: 10px; */
-  height: 100%;
-  /* background-color: rebeccapurple; */
+  height: auto;
+  border-radius: 28px;
+  display: block;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
 }
 
-.about-content {
-  max-width: 500px;
+.about__image img:hover {
+  transform: scale(1.02);
 }
 
-.about-content h2 {
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 20px;
+/* Conteúdo */
+.about__content p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 1.5rem;
 }
 
-.about-content p {
-  font-size: 18px;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 15px;
+.about__content strong {
+  color: #111;
+  font-weight: 600;
 }
 
-.shop-button {
-  padding: 12px 24px;
-  font-size: 16px;
-  color: white;
-  background: black;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+/* Stats */
+.about__stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
 }
 
-.shop-button:hover {
-  background: rgba(0, 0, 0, 0.683);
+.stat {
+  flex: 1;
+  min-width: 80px;
 }
 
-/* Responsivo */
+.stat__number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1;
+}
+
+.stat__label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .about-container {
-    flex-direction: column;
-    text-align: center;
+  .about {
+    padding: 3rem 1.5rem;
+  }
+
+  .about__title h2 {
+    font-size: 1.8rem;
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about__content p {
+    font-size: 1rem;
+  }
+
+  .about__stats {
+    gap: 1rem;
+  }
+
+  .stat__number {
+    font-size: 1.5rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .about {
+    padding: 4rem 2rem;
   }
   
-  .about-image img {
-    max-width: 100%;
+  .about__grid {
+    gap: 3rem;
   }
 }
-

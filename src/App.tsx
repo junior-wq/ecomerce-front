@@ -1,23 +1,21 @@
-import './App.css'
-import { RouterProvider } from 'react-router-dom'
-import router from './routing/routes'
-import { useState } from 'react';
-import { CartStore } from './cart-store/cart-store';
-
+import './App.css';
+import { RouterProvider } from 'react-router-dom';
+import router from './routing/routes';
+import { AuthProvider } from './state-management/cart-store/context/auth-context';
+import { MyCartProvider } from './state-management/cart-store/context/my-conext';
 
 function App() {
-  const [quantity, setQuantity] = useState(1);
-  
-  const incrementQuantity = () => setQuantity(quantity + 1);
-  const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
-  
   return (
-    <>
-      <CartStore.Provider value={{incrementQuantity,decrementQuantity}}>
-        <RouterProvider router={router}></RouterProvider>
-      </CartStore.Provider>      
-    </>
-  )
+    <AuthProvider>
+      <MyCartProvider>
+        <RouterProvider router={router} />
+      </MyCartProvider>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
+
+
+
+

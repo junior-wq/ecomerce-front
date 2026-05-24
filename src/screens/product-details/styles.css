@@ -1,17 +1,19 @@
+
 .p-detail_containner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 25px 150px;
   gap: 50px;
-  min-width: calc(100vh - 20px);
-  padding-top: 60px;
+  min-height: calc(100vh - 20px);
+  
 } 
 
 
+
 .p-detail_left {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  right: 10px;
 
 } 
 
@@ -35,8 +37,7 @@
 .showcase-options {
   overflow: hidden;
   height: 70px;
-  /* background-color: #6220203f; */
-  /* border-radius: 10px; */
+
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
@@ -45,14 +46,10 @@
 }
 
 .options-img-container{
-  /* background-color: #555;  */
-  /* flex:1 1 30% */
   width: 30%;
-
 }
 
 .options-img-container img {
-  /* overflow: hidden; */
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -83,7 +80,7 @@ p {
 .price {
   display: inline-block;
   margin-top: 20px;
-  /* margin-bottom: 15px; */
+
   display: flex;
   gap: 10px;
   align-items: center;
@@ -122,10 +119,10 @@ p {
   display: flex;
   align-items: center;
   gap: 2px;
-  background-color: #e0e0e0; /* Cinza claro */
-  border-radius: 50px; /* Formato oval */
-  justify-content: center; /* Centraliza os botões */
-  width: auto; /* Deixa o tamanho ajustável ao conteúdo */
+  background-color: #e0e0e0; 
+  border-radius: 50px; 
+  justify-content: center; 
+  width: auto; 
   height:100%;
   box-sizing: border-box;
 }
@@ -142,11 +139,10 @@ p {
 }
 
 .quantity-display {
-  /* font-size: 16px; */
   font-weight: bold;
 }
 
-/* Botão "Add to Cart" */
+
 .actions {
   display: flex;
   justify-content: flex-start;
@@ -162,9 +158,6 @@ p {
   border-radius: 50px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* width: auto;  */
-  /* text-overflow:ellipsis;
-  box-sizing: border-box; */
 }
 
 .add-to-cart-btn:hover {
@@ -180,11 +173,83 @@ p {
   color: black;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
+
+
+
+.whatsapp-container {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 999;
+}
+
+
+.whatsapp-bubble {
+  background-color: white;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  animation: fadeIn 0.3s ease;
+}
+
+
+.whatsapp-button {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #25D366; 
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+.whatsapp-button:active {
+  transform: scale(0.95);
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+@media  (max-width: 1000px) {
   .p-detail_containner {
     grid-template-columns: 1fr;
-    padding: 20px;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    
+  }
+
+  .p-detail_left {
+    width: 100vw;
+    margin-top: 10px;
   }
 
   .showcase {
@@ -192,7 +257,9 @@ p {
   }
 
   .p-detail_right {
-    margin-top: 20px;
+    width: 100vw;
+    padding: 0 0.5rem;
+    
   }
 
   .quantity-control {
@@ -201,5 +268,79 @@ p {
 
   .add-to-cart-btn {
     width: 100%;
+   
   }
 }
+
+
+
+
+@media  (max-width: 500px) {
+  .p-detail_containner {
+    grid-template-columns: 1fr;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    
+  }
+
+  .p-detail_left {
+    width: 100vw;
+    margin-top: 10px;
+  }
+
+  .showcase {
+    height: 250px;
+  }
+
+  .p-detail_right {
+    width: 100vw;
+    padding: 0 0.5rem;
+    
+  }
+
+  .quantity-control {
+    width: auto;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+   
+  }
+}
+
+
+
+
+@media  (max-width: 1000px) {
+  .p-detail_containner {
+    max-width:100vw;
+    display: flex;
+    
+    padding: 25px 50px;
+    gap: 20px;
+    min-height: calc(100vh - 20px);
+ 
+    
+    
+  } 
+}
+
+
+
+@media  (max-width: 700px) {
+  .p-detail_containner {
+    
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+   
+    padding: 25px 0px;
+    gap: 10px;
+
+     
+  } 
+} 
+
+
+

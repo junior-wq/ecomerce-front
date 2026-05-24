@@ -1,29 +1,70 @@
-import "./styles.css";
+import React from 'react';
+import './styles.css';
 
+interface AboutProps {
+  imageUrl?: string;
+  storeName?: string;
+  foundedYear?: number;
+  description?: string;
+  stats?: {
+    years: number;
+    customers: string;
+    focus: string;
+  };
+}
 
-function About() {
+const About: React.FC<AboutProps> = ({
+  imageUrl = "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=450&fit=crop",
+  storeName = "Nova Store",
+  foundedYear = 2016,
+  description = "Nasceu para transformar experiências. Design minimalista, qualidade excepcional e atendimento que faz a diferença.",
+  stats = { years: 8, customers: "5k+", focus: "100%" }
+}) => {
+  const currentYear = new Date().getFullYear();
+  const yearsOperating = currentYear - foundedYear;
+
   return (
-    <section className="about" id="about">
-      <div className="about-container">
-        <div className="about-image">
-        <img src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Atendimento ao cliente ecommerce" />
+    <section className="about">
+      <div className="about__title">
+        <h2>Sobre Nós</h2>
+      </div>
+
+      <div className="about__grid">
+        <div className="about__image">
+          <img 
+            src={imageUrl} 
+            alt={storeName}
+          />
         </div>
-        <div className="about-content">
-          <h2>Sobre Nós</h2>
+        
+        <div className="about__content">
           <p>
-            Descubra a beleza e a sofisticação das nossas joias. Cada peça é cuidadosamente 
-            trabalhada para proporcionar elegância e exclusividade. Nosso compromisso é com 
-            a qualidade e o design atemporal.
+            A <strong>{storeName}</strong> {description}
           </p>
           <p>
-            Seja para um momento especial ou para realçar sua beleza no dia a dia, nossas 
-            coleções são criadas para brilhar com você.
+            Há mais de {yearsOperating} anos criando momentos únicos para quem busca 
+            produtos selecionados com cuidado e uma experiência de compra 
+            verdadeiramente especial.
           </p>
-          <button className="shop-button">Explorar Coleção</button>
+          
+          <div className="about__stats">
+            <div className="stat">
+              <div className="stat__number">{stats.years}+</div>
+              <div className="stat__label">Anos</div>
+            </div>
+            <div className="stat">
+              <div className="stat__number">{stats.customers}</div>
+              <div className="stat__label">Clientes</div>
+            </div>
+            <div className="stat">
+              <div className="stat__number">{stats.focus}</div>
+              <div className="stat__label">Foco</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default About;

@@ -4,6 +4,7 @@
   right: 20px;
   top: 60px;
   z-index: 1;
+  /* background-color: blueviolet; */
   box-shadow:  rgba(0, 0, 0, 0.774) 0px 0px 7px;
   padding: 10px;
   border-radius: 5px;
@@ -48,11 +49,12 @@
 }
 
 .empty-cart-img{
-  width: 50%;
+  width: 70%;
    /* height: 100px;  */
   object-fit: contain;
   align-self: center;
   margin-bottom: 15px;
+  margin-top: 5px;
 }
 
 .empty-cart-desc{
@@ -72,3 +74,8 @@
   margin-top: auto;
 }
 
+
+@media screen and (max-width:500px){
+
+
+}

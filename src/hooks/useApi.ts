@@ -80,3 +80,32 @@ export function useApiDetails<T>({
   return { data, isLoading, error };
 }
 
+
+
+
+
+
+export function useApi<T>(Apiroute:string): ApiDataDetails<T> {
+  const [data, setData] = useState<T | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const endpoint =`${Apiroute}/`
+
+    apiClient
+      .get(endpoint)
+      .then((res) => {
+        setData(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message || 'Erro ao buscar dados');
+        setIsLoading(false);
+      });
+  }, [Apiroute]);
+  
+  return { data, isLoading, error };
+}

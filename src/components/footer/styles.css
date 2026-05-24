@@ -4,7 +4,7 @@
   flex-wrap: wrap;   
   background-color: #000; /* Fundo preto */  
   color: #fff; /* Texto branco */  
-  padding: 40px 10%;   
+  padding: 5px 10%;   
 }  
 
 .footer_colum {   
@@ -13,12 +13,14 @@
   margin: 10px; 
 }  
 
-.footer_colum h4 {   
+.footer_colum h3 {   
   font-size: 18px;   
   margin-bottom: 15px;   
   text-transform: uppercase; 
-  color: #fff; /* Garantindo que os títulos também fiquem brancos */
+  color: #fff; 
 }  
+
+
 
 .footer_colum a {   
   text-decoration: none;   

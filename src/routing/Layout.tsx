@@ -1,16 +1,20 @@
-import React from 'react'
 import NavBar from '../components/nav-bar/NavBar'
-import Footer from '../components/footer/footer'
-
 import { Outlet } from 'react-router-dom'
+import { SearchProvider } from '../state-management/cart-store/context/SearchContext'
+import Footer from '../components/footer/Footer'
+
 
 function Layout() {
+
+
   return (
     <>
-      <NavBar/>
-        <main id='main'>
-          <Outlet></Outlet>
-        </main>
+      <SearchProvider>
+        <NavBar  />
+              <main id='main'>
+                <Outlet></Outlet>
+              </main>
+      </SearchProvider>
       <Footer/>
     </>
   )
