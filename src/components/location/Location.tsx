@@ -1,5 +1,5 @@
 import { useApi } from '../../hooks/useApi';
-import Spiner from '../spiner/spiner';
+import Spiner from '../spiner/Spiner';
 import './styles.css';
 import { FiMapPin, FiPhone, FiMail, FiClock, FiNavigation } from 'react-icons/fi';
 
