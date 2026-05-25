@@ -6,7 +6,8 @@ import ProductDetail from '../../components/product-detail/ProductDetail';
 import { CartProductType, ProductType } from '../../interfaces/interfaces';
 import { useParams } from 'react-router-dom';
 import  { useProduct } from '../../hooks/useProducts';
-import Spiner from '../../components/spiner/spiner';
+import Spiner from '../../components/spiner/Spiner';
+
 import { createItem } from '../../components/cart/services/cartServices';
 import { addOrUpdateCartItems, useMyCartContext } from '../../state-management/cart-store/context/my-context';
 

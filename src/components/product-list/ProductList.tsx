@@ -86,6 +86,7 @@ import { useApiList } from '../../hooks/useApi';
 import { ProductType } from '../../interfaces/interfaces';
 import { useSearchContext } from '../../state-management/cart-store/context/SearchContext';
 // import Spiner from '../spiner/spiner';
+import Spiner from '../spiner/Spiner';  // S maiúsculo
 
 type CategoryType = {
   id: number;
@@ -133,7 +134,7 @@ export default function ProductList() {
       <div  className="products-grid">
         {isLoading ? (
           <div style={{display: 'flex', justifyContent: 'center',alignItems:'center'}}  >
-            {/* <Spiner /> */}<p>Carregando...</p>
+            <Spiner />
           </div>
         ) : (
           products.map((product: ProductType) => (
