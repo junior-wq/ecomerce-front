@@ -1,30 +1,20 @@
 import './styles.css';
 import {  useState } from 'react';
-import ColorSelector from '../../components/color-selector/ColorSelector';
-import Comment from '../../components/comments/Comment';
-import { comments } from '../../components/comments/Comment';
+
 import ProductDetail from '../../components/product-detail/ProductDetail';
 
 import { CartProductType, ProductType } from '../../interfaces/interfaces';
 import { useParams } from 'react-router-dom';
-import useProducts, { useProduct } from '../../hooks/useProducts';
+import  { useProduct } from '../../hooks/useProducts';
 import Spiner from '../../components/spiner/spiner';
 import { createItem } from '../../components/cart/services/cartServices';
-import { addOrUpdateCartItems, useMyCartContext } from '../../state-management/cart-store/context/my-conext';
+import { addOrUpdateCartItems, useMyCartContext } from '../../state-management/cart-store/context/my-context';
 
 import { FaWhatsapp } from 'react-icons/fa';
 import apiClient from '../../services/api-client';
 import ProductSpecs from './component/ProductSpecs';
 
 function ProductDetails() {
-
-
-
-
-
-
-
-
 
   const { id: productId } = useParams();
   // const { data, isLoading, error } = useProducts(productId);

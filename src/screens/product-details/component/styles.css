@@ -1,0 +1,78 @@
+/* components/product-specs/ProductSpecs.css */
+.product-specs {
+  margin: 24px 0;
+  padding: 0;
+}
+
+.specs-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
+
+.spec-value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 400;
+  text-align: right;
+  max-width: 60%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .spec-item {
+    padding: 10px 0;
+  }
+  
+  .spec-label,
+  .spec-value {
+    font-size: 13px;
+  }
+  
+  .spec-value {
+    max-width: 55%;
+  }
+}
+
+@media (max-width: 480px) {
+  .specs-title {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .spec-item {
+    padding: 8px 0;
+  }
+  
+  .spec-label,
+  .spec-value {
+    font-size: 12px;
+  }
+}

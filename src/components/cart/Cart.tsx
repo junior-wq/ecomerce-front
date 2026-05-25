@@ -10,7 +10,7 @@ import './styles.css';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../state-management/cart-store/context/auth-context';
-import { useMyCartContext } from '../../state-management/cart-store/context/my-conext';
+import { useMyCartContext } from '../../state-management/cart-store/context/my-context';
 
 interface Props{
   closeCart:()=>void

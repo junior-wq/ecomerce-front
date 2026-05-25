@@ -1,35 +1,32 @@
-import Logo from '../../assets/logo.png';
 import './styles.css';
+
+import Logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import Search from '../../assets/search.png'
-import X from '../../assets/x.png'
+// import X from '../../assets/x.png'
 import Menu from '../../assets/menu.png'
-import Notification from '../../assets/notification.png'
-import Cart from '../../assets/cart.png'
-import Profile from '../../assets/profile.png'
+// import Notification from '../../assets/notification.png'
+// import Cart from '../../assets/cart.png'
+// import Profile from '../../assets/profile.png'
 import CartComponet from '../cart/Cart';
-import { useContext, useState } from 'react';
-import { CartContext } from '../../state-management/cart-store/context/cart-context';
-import { useMyCartContext } from '../../state-management/cart-store/context/my-conext';
-import Login from '../../screens/login/Login';
+import {  useState } from 'react';
+
+// import { useMyCartContext } from '../../state-management/cart-store/context/my-context';
+// import Login from '../../screens/login/Login';
 import { useSearchContext } from '../../state-management/cart-store/context/SearchContext';
 
 
 
-// {setSearch}:{setSearch:(e:string)=>void}
 
 const NavBar = () => {
 
   const [cartVisible,setCartVisible]= useState<boolean>(false)
-  // const { cart} = useContext(CartContext)
-  // const { state:{cart}, dispatch } = useContext(CartContext);
-  const {state:{cart}}=useMyCartContext()
+
+  // const {state:{cart}}=useMyCartContext()
  
   const [isMobileMenuOpen,setIsMobileMenuOpen]=useState(false)
 
-  const [isShow,setIsShown]=useState(false)
-
-  // const [search,setSearch]=useState<string>('')
+  // const [isShow,setIsShown]=useState(false)
 
   const {searchQuery,setSearchQuery}= useSearchContext()
 
@@ -40,9 +37,6 @@ const NavBar = () => {
             <span onClick={()=>setIsMobileMenuOpen(false)}>
               x
             </span>
-            
-              
-            
             <Link onClick={()=>setIsMobileMenuOpen(!isMobileMenuOpen)} to="/" className="nav__link--mobile">
               Home
             </Link>
@@ -55,11 +49,6 @@ const NavBar = () => {
     )
   }
   
-
-
-
-
-
 
   return (
     <nav className="nav-bar">

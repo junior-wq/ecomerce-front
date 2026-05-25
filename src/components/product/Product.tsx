@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles.css';
-import { Product as ProductType } from '../../utils';
+
 import { FaWhatsapp } from 'react-icons/fa';
+import { ProductType } from '../../interfaces/interfaces';
 
 type Props = {
   product: ProductType;
