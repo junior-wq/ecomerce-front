@@ -1,7 +1,7 @@
 
 import CartItem from './cartItem/CartItem';
 import Button from '../button/Button';
-import Spiner from '../spiner/spiner';
+import Spiner from '../spiner/Spiner';
 import EmptyCart from '../../assets/empty-cart.png';
 
 import { getCartId } from '../../services/local-storage-servivces';
