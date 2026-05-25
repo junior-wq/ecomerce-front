@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Order.css";
+import "./order.css";
 import ReviewModal from "../reviews/ReviewForm";
 import { useAuth } from "../../state-management/cart-store/context/auth-context";
 import { useApiList } from "../../hooks/useApi";
